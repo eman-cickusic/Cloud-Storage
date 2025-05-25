@@ -1,0 +1,29 @@
+# Example .boto configuration file for CSEK
+# This shows the relevant sections for encryption configuration
+
+[Boto]
+# Your other boto configuration...
+
+[GSUtil]
+# Other gsutil configuration...
+
+# Customer-Supplied Encryption Key (CSEK) Configuration
+# Uncomment and set these values with your actual keys
+
+# Current encryption key (for new uploads)
+encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
+
+# Decryption keys (for accessing previously encrypted objects)
+# Used when rotating keys - old keys go here
+# decryption_key1=old-key-value-here
+# decryption_key2=even-older-key-value-here
+
+# Notes:
+# 1. Generate keys using: python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32))'
+# 2. Copy only the key value (exclude b' and \n)
+# 3. Keys should be AES-256 base-64 encoded
+# 4. When rotating keys:
+#    - Move current encryption_key to decryption_key1
+#    - Set new encryption_key
+#    - Use 'gsutil rewrite -k' to update objects
+# 5. Keep old decryption keys until all objects are rewritten
